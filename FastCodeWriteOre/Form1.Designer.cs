@@ -34,6 +34,9 @@
 			this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
 			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.dtExportStart = new System.Windows.Forms.DateTimePicker();
+			this.dtExportEnd = new System.Windows.Forms.DateTimePicker();
+			this.checkClearAll = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -41,7 +44,7 @@
 			// 
 			this.button1.Location = new System.Drawing.Point(27, 239);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(264, 46);
+			this.button1.Size = new System.Drawing.Size(117, 46);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Esporta ore";
 			this.button1.UseVisualStyleBackColor = true;
@@ -98,17 +101,50 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Calcola differenae orarie";
 			// 
+			// dtExportStart
+			// 
+			this.dtExportStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dtExportStart.Location = new System.Drawing.Point(168, 239);
+			this.dtExportStart.Name = "dtExportStart";
+			this.dtExportStart.Size = new System.Drawing.Size(123, 20);
+			this.dtExportStart.TabIndex = 6;
+			// 
+			// dtExportEnd
+			// 
+			this.dtExportEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dtExportEnd.Location = new System.Drawing.Point(168, 265);
+			this.dtExportEnd.Name = "dtExportEnd";
+			this.dtExportEnd.Size = new System.Drawing.Size(123, 20);
+			this.dtExportEnd.TabIndex = 7;
+			// 
+			// checkClearAll
+			// 
+			this.checkClearAll.AutoSize = true;
+			this.checkClearAll.Checked = true;
+			this.checkClearAll.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkClearAll.Location = new System.Drawing.Point(166, 298);
+			this.checkClearAll.Name = "checkClearAll";
+			this.checkClearAll.Size = new System.Drawing.Size(88, 17);
+			this.checkClearAll.TabIndex = 8;
+			this.checkClearAll.Text = "Rigenera File";
+			this.checkClearAll.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(337, 306);
+			this.ClientSize = new System.Drawing.Size(327, 325);
+			this.Controls.Add(this.checkClearAll);
+			this.Controls.Add(this.dtExportEnd);
+			this.Controls.Add(this.dtExportStart);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.button1);
 			this.Name = "Form1";
 			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -120,6 +156,9 @@
 		private System.Windows.Forms.DateTimePicker dateTimePicker3;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.DateTimePicker dtExportStart;
+		private System.Windows.Forms.DateTimePicker dtExportEnd;
+		private System.Windows.Forms.CheckBox checkClearAll;
 	}
 }
 
