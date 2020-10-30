@@ -2,87 +2,26 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FastCodeWriteOre
 {
-	public partial class Form1 : Form
-	{
-		public Form1()
+	public class EsportaDati
+    {
+		Impostazioni _impostazioni;
+		public EsportaDati(Impostazioni impostazioni)
 		{
-			InitializeComponent();
-			dtExportStart.Value = DateTime.Now.AddMonths(-1);
-			dtExportStart.Value = dtExportStart.Value.AddDays(-dtExportStart.Value.Day + 1 + 20);
-
-			dtExportEnd.Value = dtExportStart.Value.AddMonths(1);
-			dtExportEnd.Value = dtExportEnd.Value.AddDays(-dtExportEnd.Value.Day + 1 + 20);
-
-			while (dtExportStart.Value.DayOfWeek!=DayOfWeek.Monday)
-			{
-				dtExportStart.Value=dtExportStart.Value.AddDays(1);
-			}
-			while (dtExportEnd.Value.DayOfWeek != DayOfWeek.Sunday)
-			{
-				dtExportEnd.Value=dtExportEnd.Value.AddDays(+1);
-			}
-			
+			_impostazioni = impostazioni;
 		}
-		public string DiarioCantiere { get; set; }
-		public string FileRaccoltaDati { get; set; }
-		private void button1_Click(object sender, EventArgs e)
+		public void Elabora()
 		{
-			//DiarioCantiere = @"C:\Users\fastcode13042017\Desktop\OrariCantieri\FASTCODE-EVANGELISTI_ALESSANDRO-Diario_Sede_Cantiere.xlsm";
-			//FileRaccoltaDati = @"C:\Users\fastcode13042017\Desktop\RaccoltaDati x dip Cantieri Evangelisti Alessandro_Dic_2019.xlsx";
 
-			SelectFile();
-		}
-		private void SelectFile()
-		{
-			using (OpenFileDialog res = new OpenFileDialog())
+
+			using (var excelRaccoltaDati = new ClosedXML.Excel.XLWorkbook(_impostazioni.RaccoltaDati.File))
 			{
-				if (DiarioCantiere == null)
-				{
-					res.Title = "Seleziona file diario cantiere";
-					//Filter
-					res.Filter = "File excel|*fastcode*.xlsm;|Tutti i file|*.*";
-
-					res.Multiselect = false;
-					//When the user select the file
-					if (res.ShowDialog() == DialogResult.OK)
-					{
-						DiarioCantiere = res.FileName;
-
-					}
-				}
-				if (FileRaccoltaDati == null)
-				{
-					res.Title = "Seleziona file RaccoltaDati x dip Cantieri";
-					//Filter
-					res.Filter = "File excel|*.xls;*.xlsx|Tutti i file|*.*";
-
-					res.Multiselect = false;
-					//When the user select the file
-					if (res.ShowDialog() == DialogResult.OK)
-					{
-						FileRaccoltaDati = res.FileName;
-
-					}
-				}
-				if (FileRaccoltaDati != null && DiarioCantiere != null)
-				{
-					Elabora();
-				}
-			}
-
-		}
-
-		private void Elabora()
-		{
-
-
-			using (var excelRaccoltaDati = new ClosedXML.Excel.XLWorkbook(FileRaccoltaDati))
-			{
-				using (var excelDiario = new ClosedXML.Excel.XLWorkbook(DiarioCantiere))
+				using (var excelDiario = new ClosedXML.Excel.XLWorkbook(_impostazioni.DiarioCantiere.File))
 				{
 
 					var row = 3;
@@ -92,7 +31,7 @@ namespace FastCodeWriteOre
 					var list = new List<OreCantiere>();
 					ClosedXML.Excel.IXLWorksheet meseSheet = excelRaccoltaDati.Worksheet(2);
 
-					
+
 					var listDate = DatePeriodo();
 
 					for (int i = 6; i <= rowDiarioLast; i++)
@@ -117,7 +56,7 @@ namespace FastCodeWriteOre
 
 			}
 
-			MessageBox.Show("Operazione conclusa con successo");
+			MessageBox.Show("Operazione conclusa con successo","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
 
 		}
@@ -126,22 +65,22 @@ namespace FastCodeWriteOre
 		{
 			return Enumerable
 			.Range(0, int.MaxValue)
-			.Select(index => new DateTime?(dtExportStart.Value.AddDays(index)))
-			.TakeWhile(date => date <= dtExportEnd.Value)
-			.Select(a=>a.Value.Date)
+			.Select(index => new DateTime?(_impostazioni.dataInizio.AddDays(index)))
+			.TakeWhile(date => date <= _impostazioni.dataFine)
+			.Select(a => a.Value.Date)
 			.ToList();
 		}
 
 		private void RipulisciFoglio(ClosedXML.Excel.IXLWorksheet meseSheet)
 		{
-			if (checkClearAll.Checked)
+			if (true)
 			{
 				meseSheet.Range("A3:Z100").Clear(ClosedXML.Excel.XLClearOptions.Contents);
-			 
+
 				var row = 3;
 				foreach (var item in DatePeriodo())
 				{
-					
+
 					meseSheet.Cell(row, 1).Value = item.ToString("dd/MM/yyyy");
 					meseSheet.Cell(row, 2).Value = item.ToString("ddd", new CultureInfo("it-IT"));
 					row++;
@@ -194,7 +133,7 @@ namespace FastCodeWriteOre
 
 		private void ScriviRiga(ClosedXML.Excel.IXLWorksheet meseSheet, int row, string commessa, decimal sommaOre, bool cantiere)
 		{
-			
+
 
 			meseSheet.Cell(row, 3).Value = commessa;
 			meseSheet.Cell(row, 5).Value = sommaOre;
@@ -216,36 +155,6 @@ namespace FastCodeWriteOre
 			public string Commessa { get; set; }
 			public decimal Ore { get; set; }
 			public bool Cantiere { get; set; }
-		}
-
-		private void dateTimePicker2_Validated(object sender, EventArgs e)
-		{
-			CalcolaDiff();
-		}
-
-		private void CalcolaDiff()
-		{
-			dateTimePicker3.Value = new DateTime(dateTimePicker2.Value.Date.Ticks + (dateTimePicker2.Value - dateTimePicker1.Value).Ticks);
-		}
-
-		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void dateTimePicker1_Validated(object sender, EventArgs e)
-		{
-			CalcolaDiff();
-		}
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			CalcolaDiff();
-		}
-
-		private void Form1_Load(object sender, EventArgs e)
-		{
-
 		}
 	}
 }
