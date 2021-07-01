@@ -140,6 +140,11 @@ namespace FastCodeWriteOre
 			if (cantiere)
 			{
 				meseSheet.Cell(row, 4).Value = "Cantiere Italia";
+				if (_impostazioni.TrasfertaEstera)
+                {
+
+					meseSheet.Cell(row, 4).Value = "Cantiere UE";
+				}
 				meseSheet.Cell(row, 12).Value = "x";
 				meseSheet.Cell(row, 13).Value = "x";
 				meseSheet.Cell(row, 14).Value = "x";

@@ -17,6 +17,8 @@ namespace FastCodeWriteOre
             dtExportEnd.Value = _impostazioni.dataFine;
             dtExportStart.DataBindings.Add("Value", _impostazioni, "dataInizio");
             dtExportEnd.DataBindings.Add("Value", _impostazioni, "dataFine");
+            chkEstero.DataBindings.Add("Checked", _impostazioni, "TrasfertaEstera");
+
 
         }
 
@@ -38,7 +40,8 @@ namespace FastCodeWriteOre
                 _impostazioni.RaccoltaDati.File = "";
                 _impostazioni.DiarioCantiere.File = "";
             }
-            _impostazioni.RaccoltaDati.File= ""; 
+            _impostazioni.RaccoltaDati.File= "";
+            _impostazioni.TrasfertaEstera = chkEstero.Checked;
 
             using (OpenFileDialog res = new OpenFileDialog())
             {

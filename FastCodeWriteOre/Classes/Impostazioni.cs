@@ -30,7 +30,8 @@ namespace FastCodeWriteOre
         }
         public FileCartella DiarioCantiere { get; set; } = new FileCartella();
         public FileCartella  RaccoltaDati { get; set; } = new FileCartella();
- 
+
+        public bool TrasfertaEstera { get; set; } = false;
         public DateTime dataInizio { get; set; }
         public DateTime dataFine { get; set; }
 
