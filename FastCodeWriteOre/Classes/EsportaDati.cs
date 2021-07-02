@@ -58,6 +58,14 @@ namespace FastCodeWriteOre
 
 			MessageBox.Show("Operazione conclusa con successo","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
+			var psi = new System.Diagnostics.ProcessStartInfo
+			{
+				FileName = _impostazioni.RaccoltaDati.File,
+				UseShellExecute = true
+			};
+			System.Diagnostics.Process.Start(psi);
+			 
+			
 
 		}
 
@@ -108,21 +116,22 @@ namespace FastCodeWriteOre
 					var dataCel = DateTime.Parse(meseSheet.Cell(row, 1).Value.ToString()).Date;
 					if (dataCel == item.Data)
 					{
-						if (meseSheet.Cell(row, 3).IsEmpty())
+
+						//meseSheet.Cell(row, 3).Value = dataCel.
+						if (!meseSheet.Cell(row, 4).IsEmpty())
 						{
-							ScriviRiga(meseSheet, row, item.Commessa, item.SommaOre, item.Cantiere);
-							break;
-						}
-						else
-						{
+							
 							meseSheet.Row(row).InsertRowsBelow(1);
 							row++;
 							meseSheet.Cell(row, 1).Value = dataCel.ToString("dd/MM/yyyy");
 							meseSheet.Cell(row, 2).Value = dataCel.ToString("ddd", new CultureInfo("it-IT"));
 
-							ScriviRiga(meseSheet, row, item.Commessa, item.SommaOre, item.Cantiere);
-							break;
+							
 						}
+						meseSheet.Cell(row, 3).Value = ISOWeek.GetWeekOfYear(dataCel);
+
+						ScriviRiga(meseSheet, row, item.Commessa, item.SommaOre, item.Cantiere);
+						break;
 
 					}
 					row++;
@@ -135,23 +144,23 @@ namespace FastCodeWriteOre
 		{
 
 
-			meseSheet.Cell(row, 3).Value = commessa;
-			meseSheet.Cell(row, 5).Value = sommaOre;
+			meseSheet.Cell(row, 4).Value = commessa;
+			meseSheet.Cell(row, 6).Value = sommaOre;
 			if (cantiere)
 			{
-				meseSheet.Cell(row, 4).Value = "Cantiere Italia";
+				meseSheet.Cell(row, 5).Value = "Cantiere Italia";
 				if (_impostazioni.TrasfertaEstera)
                 {
 
-					meseSheet.Cell(row, 4).Value = "Cantiere UE";
+					meseSheet.Cell(row, 5).Value = "Cantiere UE";
 				}
-				meseSheet.Cell(row, 12).Value = "x";
 				meseSheet.Cell(row, 13).Value = "x";
 				meseSheet.Cell(row, 14).Value = "x";
+				meseSheet.Cell(row, 15).Value = "x";
 			}
 			else
 			{
-				meseSheet.Cell(row, 4).Value = "Sede System o telework";
+				meseSheet.Cell(row, 5).Value = "Sede System o telework";
 			}
 		}
 		internal class OreCantiere

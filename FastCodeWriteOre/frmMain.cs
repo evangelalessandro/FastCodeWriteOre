@@ -78,7 +78,7 @@ namespace FastCodeWriteOre
                     }
                 }
                 if (!string.IsNullOrEmpty(_impostazioni.RaccoltaDati.File)
-                    || !string.IsNullOrEmpty(_impostazioni.DiarioCantiere.File))
+                    && !string.IsNullOrEmpty(_impostazioni.DiarioCantiere.File))
                 {
                     var elab = new EsportaDati(_impostazioni);
                     elab.Elabora();
