@@ -13,20 +13,20 @@ namespace FastCodeWriteOre
     {
         public Impostazioni()
         {
-            dataInizio = DateTime.Now.AddMonths(-1);
-            dataInizio = dataInizio.AddDays(-dataInizio.Day + 1 + 20);
+            //dataInizio = DateTime.Now.AddMonths(-1);
+            //dataInizio = dataInizio.AddDays(-dataInizio.Day + 1 + 20);
 
-            dataFine = dataInizio.AddMonths(1);
-            dataFine = dataFine.AddDays(-dataFine.Day + 1 + 20);
+            //dataFine = dataInizio.AddMonths(1);
+            //dataFine = dataFine.AddDays(-dataFine.Day + 1 + 20);
 
-            while (dataInizio.DayOfWeek != DayOfWeek.Monday)
-            {
-                dataInizio = dataInizio.AddDays(1);
-            }
-            while (dataFine.DayOfWeek != DayOfWeek.Sunday)
-            {
-                dataFine = dataFine.AddDays(+1);
-            }
+            //while (dataInizio.DayOfWeek != DayOfWeek.Monday)
+            //{
+            //    dataInizio = dataInizio.AddDays(1);
+            //}
+            //while (dataFine.DayOfWeek != DayOfWeek.Sunday)
+            //{
+            //    dataFine = dataFine.AddDays(+1);
+            //}
         }
         public FileCartella DiarioCantiere { get; set; } = new FileCartella();
         public FileCartella  RaccoltaDati { get; set; } = new FileCartella();
