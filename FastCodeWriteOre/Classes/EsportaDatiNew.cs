@@ -25,7 +25,7 @@ namespace FastCodeWriteOre
             {
                 using (var excelDiario = new ClosedXML.Excel.XLWorkbook(_impostazioni.DiarioCantiere.File))
                 {
-                     
+
 
                     var rowDiarioLast = excelDiario.Worksheet(1).Range("B:B").LastCellUsed().Address.RowNumber;
 
@@ -69,7 +69,7 @@ namespace FastCodeWriteOre
 
 
                     /*aggiungo le date mancanti del periodo selezionato*/
-                    foreach (var itemData in listDate )
+                    foreach (var itemData in listDate)
                     {
                         if (dataOutput.Where(a => a.Data == itemData).Count() == 0)
                         {
@@ -79,16 +79,18 @@ namespace FastCodeWriteOre
                             dataOutput.Add(itemRow);
                         }
                     }
-                    foreach (var itemOut in dataOutput.Where(a => a.Cantiere || _impostazioni.TrasfertaEstera).ToList())
+                    foreach (var itemOut in dataOutput.Where(a => a.Cantiere || _impostazioni.TrasfertaEstera || !string.IsNullOrEmpty(a.Commessa)).ToList())
                     {
                         string opt = "";
+
                         if (string.IsNullOrEmpty(itemOut.Commessa) && _impostazioni.TrasfertaEstera)
                         {
 
                             opt = "Giorno non lavorativo cantiere Estero";
                         }
-                        else
+                        else if (itemOut.Cantiere)
                         {
+                            
                             if (_impostazioni.TrasfertaEstera)
                             {
                                 opt = "Cantiere UE";
@@ -98,7 +100,16 @@ namespace FastCodeWriteOre
                                 opt = "Cantiere Italia";
                             }
                         }
-                        itemOut.Pasto = true;
+                        else if (!string.IsNullOrEmpty(itemOut.Commessa))
+                        {
+                            opt = "Sede System o telework";
+
+                        }
+                        if (_impostazioni.TrasfertaEstera || itemOut.Cantiere)
+                        {
+                            itemOut.Pasto = true;
+                            
+                        }
                         itemOut.SedeLavoro = opt;
                     }
 
@@ -107,14 +118,14 @@ namespace FastCodeWriteOre
                     RipulisciFoglio(meseSheet);
 
 
-                    ScriviOre(  meseSheet, dataOutput);
+                    ScriviOre(meseSheet, dataOutput);
 
                     excelRaccoltaDati.Save();
                 }
 
             }
 
-           
+
             var psi = new System.Diagnostics.ProcessStartInfo
             {
                 FileName = _impostazioni.RaccoltaDati.File,
@@ -145,7 +156,7 @@ namespace FastCodeWriteOre
         }
 
 
-        private void ScriviOre(  
+        private void ScriviOre(
             ClosedXML.Excel.IXLWorksheet meseSheet, List<RowExcel> dataOutput)
         {
             int row = 3;
