@@ -37,6 +37,12 @@ namespace FastCodeWriteOre
     }
     private void SelectFile()
     {
+      if (_impostazioni.dataInizio >= _impostazioni.dataFine)
+      {
+        MessageBox.Show("Data inizio maggiore di quella di fine!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+      }
+
       var domanda = (MessageBox.Show("Vuoi usare i file selezionati l'ultima volta?", "Domanda",
           MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question));
       if (domanda == DialogResult.Cancel)
