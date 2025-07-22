@@ -1,7 +1,5 @@
-﻿namespace FastCodeWriteOre
-{
-  partial class frmMain
-  {
+﻿namespace FastCodeWriteOre {
+  partial class frmMain {
     /// <summary>
     /// Variabile di progettazione necessaria.
     /// </summary>
@@ -11,10 +9,8 @@
     /// Pulire le risorse in uso.
     /// </summary>
     /// <param name="disposing">ha valore true se le risorse gestite devono essere eliminate, false in caso contrario.</param>
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && (components != null))
-      {
+    protected override void Dispose(bool disposing) {
+      if (disposing && (components != null)) {
         components.Dispose();
       }
       base.Dispose(disposing);
@@ -26,8 +22,8 @@
     /// Metodo necessario per il supporto della finestra di progettazione. Non modificare
     /// il contenuto del metodo con l'editor di codice.
     /// </summary>
-    private void InitializeComponent()
-    {
+    private void InitializeComponent() {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
       button1 = new System.Windows.Forms.Button();
       dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
       dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
@@ -43,13 +39,19 @@
       // 
       // button1
       // 
-      button1.Location = new System.Drawing.Point(36, 368);
+      button1.FlatAppearance.BorderSize = 2;
+      button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(192, 255, 192);
+      button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 255, 128);
+      button1.Image = (System.Drawing.Image)resources.GetObject("button1.Image");
+      button1.Location = new System.Drawing.Point(39, 366);
       button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       button1.Name = "button1";
-      button1.Size = new System.Drawing.Size(156, 71);
+      button1.Size = new System.Drawing.Size(313, 87);
       button1.TabIndex = 0;
       button1.Text = "Esporta ore";
-      button1.UseVisualStyleBackColor = true;
+      button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      button1.UseVisualStyleBackColor = false;
       button1.Click += button1_Click;
       // 
       // dateTimePicker1
@@ -84,10 +86,10 @@
       // 
       // button2
       // 
-      button2.Location = new System.Drawing.Point(20, 199);
+      button2.Location = new System.Drawing.Point(71, 162);
       button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       button2.Name = "button2";
-      button2.Size = new System.Drawing.Size(352, 71);
+      button2.Size = new System.Drawing.Size(265, 37);
       button2.TabIndex = 4;
       button2.Text = "Calcola Differenza orari";
       button2.UseVisualStyleBackColor = true;
@@ -103,7 +105,7 @@
       groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       groupBox1.Name = "groupBox1";
       groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      groupBox1.Size = new System.Drawing.Size(401, 309);
+      groupBox1.Size = new System.Drawing.Size(389, 218);
       groupBox1.TabIndex = 5;
       groupBox1.TabStop = false;
       groupBox1.Text = "Calcola differenae orarie";
@@ -111,7 +113,7 @@
       // dtExportStart
       // 
       dtExportStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-      dtExportStart.Location = new System.Drawing.Point(224, 368);
+      dtExportStart.Location = new System.Drawing.Point(39, 260);
       dtExportStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       dtExportStart.Name = "dtExportStart";
       dtExportStart.Size = new System.Drawing.Size(163, 27);
@@ -120,7 +122,7 @@
       // dtExportEnd
       // 
       dtExportEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-      dtExportEnd.Location = new System.Drawing.Point(224, 408);
+      dtExportEnd.Location = new System.Drawing.Point(39, 297);
       dtExportEnd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       dtExportEnd.Name = "dtExportEnd";
       dtExportEnd.Size = new System.Drawing.Size(163, 27);
@@ -129,7 +131,7 @@
       // chkEstero
       // 
       chkEstero.AutoSize = true;
-      chkEstero.Location = new System.Drawing.Point(36, 476);
+      chkEstero.Location = new System.Drawing.Point(70, 333);
       chkEstero.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       chkEstero.Name = "chkEstero";
       chkEstero.Size = new System.Drawing.Size(132, 24);
@@ -139,12 +141,16 @@
       // 
       // btnAddMese
       // 
-      btnAddMese.Location = new System.Drawing.Point(288, 445);
+      btnAddMese.Image = (System.Drawing.Image)resources.GetObject("btnAddMese.Image");
+      btnAddMese.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      btnAddMese.Location = new System.Drawing.Point(222, 260);
       btnAddMese.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       btnAddMese.Name = "btnAddMese";
-      btnAddMese.Size = new System.Drawing.Size(99, 31);
+      btnAddMese.Size = new System.Drawing.Size(130, 64);
       btnAddMese.TabIndex = 9;
       btnAddMese.Text = "Mese successivo";
+      btnAddMese.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+      btnAddMese.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       btnAddMese.UseVisualStyleBackColor = true;
       btnAddMese.Click += btnAddMese_Click;
       // 
@@ -152,13 +158,15 @@
       // 
       AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
       AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      ClientSize = new System.Drawing.Size(418, 554);
+      ClientSize = new System.Drawing.Size(414, 476);
       Controls.Add(btnAddMese);
       Controls.Add(chkEstero);
       Controls.Add(dtExportEnd);
       Controls.Add(dtExportStart);
       Controls.Add(groupBox1);
       Controls.Add(button1);
+      Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+      ImeMode = System.Windows.Forms.ImeMode.Off;
       Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       Name = "frmMain";
       Text = "Form1";

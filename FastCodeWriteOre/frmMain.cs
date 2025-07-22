@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace FastCodeWriteOre {
@@ -10,6 +11,7 @@ namespace FastCodeWriteOre {
     public frmMain() {
       InitializeComponent();
       _impostazioni = Impostazioni.Read();
+      this.Text = "Esporta ore " + Assembly.GetExecutingAssembly().GetName().Version;
 
       if (_impostazioni.dataInizio < DateTime.Now.AddMonths(-3))
         _impostazioni.dataInizio = DateTime.Now.AddMonths(-2);

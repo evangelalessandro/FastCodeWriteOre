@@ -123,6 +123,7 @@ namespace FastCodeWriteOre {
       .TakeWhile(date => date <= _impostazioni.dataFine)
       .Select(a => a.Value.Date)
       .ToList();
+
     }
 
     private void RipulisciFoglio(ClosedXML.Excel.IXLWorksheet meseSheet) {
