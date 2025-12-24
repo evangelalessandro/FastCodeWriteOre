@@ -151,7 +151,7 @@ namespace FastCodeWriteOre
                 meseSheet.Cell(row, 1).Value = itemRowOutput.Data.ToString("dd/MM/yyyy");
                 meseSheet.Cell(row, 2).Value = System.Globalization.ISOWeek.GetWeekOfYear(itemRowOutput.Data);
                 meseSheet.Cell(row, 3).Value = "Alessandro Evangelisti";
-                meseSheet.Cell(row, 4).Value = "DEV SW PC";
+                meseSheet.Cell(row, 4).Value = "CONS. AREA SVILUPPO SW (PLC-PC)";
                 meseSheet.Cell(row, 5).Value = itemRowOutput.SedeLavoro;
                 meseSheet.Cell(row, 7).Value = itemRowOutput.Commessa.Split(" ").Where(a => a.Length > 0).Last();
                 meseSheet.Cell(row, 8).Value = itemRowOutput.Commessa;
